@@ -49,45 +49,45 @@ The producer script in Kafka will do the job of data collector / Gateways  and w
 The subset is obtained from the original dataset (https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) which we used to develop our machine learning model to classify the patients.
 
 We managed to select 6 Topics in total.
-1. Topic research 
+* Topic research:  
 Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
 
-2. Topic dyslipidimeia
+* Topic dyslipidimeia: 
 It is the imbalance of lipids such as cholesterol, low-density lipoprotein cholesterol, (LDL-C), triglycerides, and high-density lipoprotein (HDL).
 
 
-3. Topic diabete
+* Topic diabete:
 Diabetes is a chronic (long-lasting) health condition that affects how your body turns food into energy and it is detected by a Fasting blood sugar test.
 
 
-4. Topic stroke
+* Topic stroke:
 A stroke is a serious life-threatening medical condition that happens when the blood supply to part of the brain is cut off. Strokes are a medical emergency and urgent treatment is essential.
 Stroke will be defined based on specific features values 
 
-5. Topic vitals
+* Topic vitals: 
 Vital signs are measurements of the body's most basic functions and are routinely checked by healthcare providers include:
      
 
-6. Topic cardiology
+* Topic cardiology: 
 Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
 Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
 
 ## Kafka Consumers
 ### Consumer Group A : 
-*Nurses Team 
-*Emergency doctors  
+* Nurses Team 
+* Emergency doctors  
 These consumers are Stream Consumers + get alerted when needed 
 Emergency doctors get an alert if a stroke is predicted
 The Nurses Team gets an alert if vital singns exceed normal values
 ### Consumer Group B : 
 This group of consumers can read the data from mongodb (Batch/offline):
-*Group A
-*Cardiologist
-*Endocrinologist
-*Lipidologist
-*Researcher
+* Group A
+* Cardiologist
+* Endocrinologist
+* Lipidologist
+* Researcher
 
-*Feature list per topic per consumer : (apart from age and sex)
+### Feature list per topic per consumer : (apart from age and sex)
 
 | #Topic    | #research   | #Cardiology          | #Stroke            | #Diabete         | #Dyslipidemia | #vitals               | 
 | :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
@@ -131,15 +131,9 @@ lien localhost topics
 (gif localhost)
 
 
-| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
-| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
-
 
 ## MongoDB 
-Management of users that were given access to the database is the sole responsibility of the user or users with the administrator role.
-
-The administrator has the responsibility to manage how other users in your organization access your database. For example, the administrator can add new users, block access to users who have left the organization, help users who cannot log in. So For that, as administrators we created new users and gave each one of them access to the Database with specific privileges.
-
+Management of users that were given access to the database is the sole responsibility of the user or users with the administrator role: "root"
 Administrators have the following responsibilities:
 * Add new users
 * Delete users
@@ -150,10 +144,10 @@ Administrators have the following responsibilities:
 * Change user passwords 
 For our system, we have the following users: 
 
-| User       | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
-| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
-| Collection | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
-
+| User          | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
+| :---:         | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
+| Collection    | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
+| access rights | Read Only       | Read/write , Read Only  | Read/write        | Read/write       | Read/write            | Read Only, Read/write            |
 
 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
