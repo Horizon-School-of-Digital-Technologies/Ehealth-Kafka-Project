@@ -74,13 +74,13 @@ Angina is chest pain caused by reduced blood flow to the heart muscles. It's not
 Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
 
 ## Kafka Consumers
-### Consumer Group A : 
+### Consumer Group A 
 * [Nurses](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/nurse.py)
 * [Emergency doctors](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/emergency_doctor.py) 
-These consumers are Stream Consumers + get alerted when needed 
-Emergency doctors get an alert if a stroke is predicted
-The Nurses get an alert if vital signs exceed normal values
-### Consumer Group B : 
+ These consumers are Stream Consumers + get alerted when needed 
+ Emergency doctors get an alert if a stroke is predicted
+ The Nurses get an alert if vital signs exceed normal values
+### Consumer Group B  
 This group of consumers can read the data from mongodb (Batch/offline):
 * Group A
 * [Cardiologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/cardiologist.py)
