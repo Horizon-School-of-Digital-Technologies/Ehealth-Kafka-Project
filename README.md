@@ -155,7 +155,7 @@ For our system, we have the following users:
 
 
 In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
-For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Kafka-Mongo/tree/main/Mongodb) is added to Kafka Connect correctly:
+For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Mongodb/sink.sh) is added to Kafka Connect correctly:
 (gif connect)
 ```
 curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
@@ -217,10 +217,10 @@ db.<collection_name>.find()
 exit
 ```
 
-* Connect to MongoDB container as an administrator and attribute the right privileges to each user:
-#### [Create new roles]()
-(gif)
-####[Create users]()
+* Connect to MongoDB container as an administrator and attribute the right privileges to each [user](https://github.com/nadinelabidi/Ehealth-Kafka-Project/tree/main/Mongodb)
+#### [Create new roles](https://www.mongodb.com/docs/manual/tutorial/manage-users-and-roles/)
+
+####[Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
 (gif)
 
 
