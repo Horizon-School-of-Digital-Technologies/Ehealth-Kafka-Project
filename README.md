@@ -101,37 +101,6 @@ Apache Kafka is an event streaming and batching solution and  MongoDB is the wor
 Integrating Kafka with external systems like MongoDB is done through the use of Kafka Connect. This API enables users to leverage ready-to-use components that can stream data from external systems into Kafka topics, and stream data from Kafka topics into external systems. The official MongoDB Connector for Apache Kafka® is developed and supported by MongoDB engineers and verified by Confluent. The connector, now released in Beta, enables MongoDB to be configured as both a sink and a source for Apache Kafka.
 ![](MongoDB_connector.jpg)
 
-In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
-For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Kafka-Mongo/tree/main/Mongodb) is added to Kafka Connect correctly:
-(gif connect)
-```
-curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
-```
-(gif localhost connect)
-
-Start the connector:
-```
-curl -X POST -H "Content-Type: application/json" --data @MongoDBConnector.json http://localhost:8083/connectors | jq
-```
-Verify that the connector is up and running:
-```
-curl localhost:8083/connectors/TestData/status | jq
-```
-### [Running th Kafka producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
-Run the produce:
-```
-python3 Gateway.py
-```
-(gif)
-
-Verify that data is produced correctly:
-```
-lien localhost topics
-```
-(gif localhost)
-
-
-
 ## MongoDB 
 Management of users that were given access to the database is the sole responsibility of the user or users with the administrator role: "root"
 Administrators have the following responsibilities:
@@ -148,6 +117,42 @@ For our system, we have the following users:
 | :---:         | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 | Collection    | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
 | access rights | Read Only       | Read/write , Read Only  | Read/write        | Read/write       | Read/write            | Read Only, Read/write            |
+
+
+In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
+For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Kafka-Mongo/tree/main/Mongodb) is added to Kafka Connect correctly:
+(gif connect)
+```
+curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
+```
+(gif localhost connect)
+
+Start the connector:
+```
+curl -X POST -H "Content-Type: application/json" --data @MongoDBConnector.json http://localhost:8083/connectors | jq
+```
+Verify that the connector is up and running:
+```
+curl localhost:8083/connectors/TestData/status | jq
+```
+### [Running the Kafka producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
+Run the produce:
+```
+python3 Gateway.py
+```
+(gif)
+
+Verify that data is produced correctly:
+```
+To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
+* Topics
+* Consumers
+* Mongo Sinks
+localhost:9021
+```
+Here are the verification the the clusters, its containers and the architecture is well existing:
+(gif localhost)
+
 
 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
