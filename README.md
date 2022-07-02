@@ -1,5 +1,6 @@
 # Development and Deployment of an E-Health system
-##Mini-project context : 
+## Mini-project context: 
+
 In every E-health system, a multitude of sensors or iOT objects are deployed to collect data that surveys activity , status and environment measurments per patients.
 The goal is to store data and analyze it in order to automatize decision making and protect the patients lives. 
 These decisions or records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis and reportings.
@@ -44,32 +45,27 @@ The build will create the following containers :
 ## Kafka Producer
 
 [The Kafka Producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
-The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the  [heart.csv](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) file line by line to simulate the gateway. We managed to select 6 Topics in total.
+The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will reade the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
+The subset is obtained from the original dataset (https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)  
+We managed to select 6 Topics in total.
 1. Topic research 
 Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
 
 2. Topic dyslipidimeia
 It is the imbalance of lipids such as cholesterol, low-density lipoprotein cholesterol, (LDL-C), triglycerides, and high-density lipoprotein (HDL).
-This topic takes as features : Cholesterol level, age, sex
+
 
 3. Topic diabetes
 Diabetes is a chronic (long-lasting) health condition that affects how your body turns food into energy and it is detected by a Fasting blood sugar test.
-(fasting blood sugar > 120 mg/dl) (1 = true; 0 = false)
+
 
 4. Topic stroke
 A stroke is a serious life-threatening medical condition that happens when the blood supply to part of the brain is cut off. Strokes are a medical emergency and urgent treatment is essential.
-Stroke will be defined based on specific features values : 
-    * exang
-    * oldpeak
-    * slope
-    * ca
+Stroke will be defined based on specific features values 
 
 5. Topic vital_signs
-Vital signs are measurements of the body's most basic functions. The 3 main vital signs routinely checked by healthcare providers include:
-     * trestbps : resting blood pressure (in mm Hg on admission to the hospital)
-     * chol : serum cholestoral in mg/dl
-     * restecg : resting electrocardiographic results
-     * tmp  : Body temperature
+Vital signs are measurements of the body's most basic functions and are routinely checked by healthcare providers include:
+     
 
 6. Topic heart_disease
 Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
