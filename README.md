@@ -45,7 +45,7 @@ The build will create the following containers :
 
 ## Kafka Producer
 
-[The Kafka Producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
+[The Kafka Producer](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/gateway.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
 The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will reade the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
 The subset is obtained from the original [dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) which we used to develop our machine learning model to classify the patients.
 
@@ -75,18 +75,18 @@ Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Car
 
 ## Kafka Consumers
 ### Consumer Group A : 
-* Nurses Team 
-* Emergency doctors  
+* [Nurses](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/nurse.py)
+* [Emergency doctors](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/emergency_doctor.py) 
 These consumers are Stream Consumers + get alerted when needed 
 Emergency doctors get an alert if a stroke is predicted
-The Nurses Team gets an alert if vital singns exceed normal values
+The Nurses get an alert if vital signs exceed normal values
 ### Consumer Group B : 
 This group of consumers can read the data from mongodb (Batch/offline):
 * Group A
-* Cardiologist
-* Endocrinologist
-* Lipidologist
-* Researcher
+* [Cardiologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/cardiologist.py)
+* [Endocrinologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/endocrinologist.py)
+* [Lipidologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/lipidologist.py)
+* [Researcher](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/researcher.py)
 
 ### data dictionary
 #### age - age in years
