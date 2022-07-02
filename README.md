@@ -114,7 +114,7 @@ Administrators have the following responsibilities:
 * Change user passwords 
 For our system, we have the following users: 
 
-| User          | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
+| User          |  Researcher     | Cardiologist            |  Emergency doctor |  Endocrinologist |  Lipiodologist        | Nurse                           | 
 | :---:         | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 | Collection    | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
 | access rights | Read Only       | Read/write , Read Only  | Read/write        | Read/write       | Read/write            | Read Only, Read/write            |
