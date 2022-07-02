@@ -120,7 +120,7 @@ For our system, we have the following users:
 | User       | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
 | :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 | Collection | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
-
+| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 
 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
