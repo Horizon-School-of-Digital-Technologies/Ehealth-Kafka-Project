@@ -73,13 +73,25 @@ Angina is chest pain caused by reduced blood flow to the heart muscles. It's not
 Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
 
 ## Kafka Consumers
+### Consumer Group A : 
+*Nurses Team 
+*Emergency doctors  
+These consumers are Stream Consumers + get alerted when needed 
+Emergency doctors get an alert if a stroke is predicted
+The Nurses Team gets an alert if vital singns exceed normal values
+### Consumer Group B : 
+This group of consumers can read the data from mongodb (Batch/offline):
+*Group A
+*Cardiologist
+*Endocrinologist
+*Lipidologist
+*Researcher
+
 *Feature list per topic per consumer : (apart from age and sex)
 
 | #Topic    | #research   | #Cardiology          | #Stroke            | #Diabete         | #Dyslipidemia | #vitals               | 
 | :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
 | #Consumer | #Researcher | #Cardiologist        | #Emergency doctor  | #Endocrinologist | #Lipiodologist| #Nurse                | 
-
-| :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
 | #Features | all         | cp,trestbps,restecg, | trestbps,cp,restecg| fbs              | chol          | Temp,trestbps,restecg |
 |           |             | ca,chol,thalach,slope|                    |                  |               |                       |      
 
@@ -126,7 +138,8 @@ lien localhost topics
 ## MongoDB 
 Management of users that were given access to the database is the sole responsibility of the user or users with the administrator role.
 
-The administrator has the responsibility to manage how other users in your organization access your database. For example, the administrator can add new users, block access to users who have left the organization, help users who cannot log in.
+The administrator has the responsibility to manage how other users in your organization access your database. For example, the administrator can add new users, block access to users who have left the organization, help users who cannot log in. So For that, as administrators we created new users and gave each one of them access to the Database with specific privileges.
+
 Administrators have the following responsibilities:
 * Add new users
 * Delete users
