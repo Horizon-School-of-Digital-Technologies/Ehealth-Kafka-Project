@@ -6,7 +6,7 @@ The goal is to store data and analyze it in order to automatize decision making 
 These decisions or records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis and reportings.
 Added to this, in "ALERT" cases , specialized emergency teams need to be notified in real-time.
 
-![](E-health_system.jpg)
+![](![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG))
 figure 1 shows an example of an e-health system architecture deployed in a hospital.
 Corporal sensors detect measurments per patient to survey his status (Example : Body temperature, heart beats per sec, blood sugar, etc ..)
 
@@ -15,7 +15,7 @@ We will focus on a BigData architecture that respects and deploy a specific solu
 More specifically, we will simulate the gateways with a kafka producer that will create topics where some will be consumed by real-time groups and other will be sent to a mongo Db sink dedicated to "Offline" consumers.
 The architecture we will be applying is the following : 
 
-![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG)
+
 
 This small tutorial creates a data pipeline from Apache Kafka over MongoDB into Python.
 It focuses on simplicity and can be seen as a baseline for similar projects.
