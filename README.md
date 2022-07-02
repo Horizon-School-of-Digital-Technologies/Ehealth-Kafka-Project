@@ -46,7 +46,8 @@ The build will create the following containers :
 
 [The Kafka Producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
 The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will reade the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
-The subset is obtained from the original dataset (https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)  
+The subset is obtained from the original dataset (https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) which we used to develop our machine learning model to classify the patients.
+
 We managed to select 6 Topics in total.
 1. Topic research 
 Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
@@ -55,7 +56,7 @@ Healthcare Data is one of the most important data and organizations working with
 It is the imbalance of lipids such as cholesterol, low-density lipoprotein cholesterol, (LDL-C), triglycerides, and high-density lipoprotein (HDL).
 
 
-3. Topic diabetes
+3. Topic diabete
 Diabetes is a chronic (long-lasting) health condition that affects how your body turns food into energy and it is detected by a Fasting blood sugar test.
 
 
@@ -63,25 +64,33 @@ Diabetes is a chronic (long-lasting) health condition that affects how your body
 A stroke is a serious life-threatening medical condition that happens when the blood supply to part of the brain is cut off. Strokes are a medical emergency and urgent treatment is essential.
 Stroke will be defined based on specific features values 
 
-5. Topic vital_signs
+5. Topic vitals
 Vital signs are measurements of the body's most basic functions and are routinely checked by healthcare providers include:
      
 
-6. Topic heart_disease
+6. Topic cardiology
 Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
-Classification based on SVM : normal patient / Cardiac patient
+Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
 
+## Kafka Consumers
+*Feature list per topic per consumer : (apart from age and sex)
 
+| #Topic    | #research   | #Cardiology          | #Stroke            | #Diabete         | #Dyslipidemia | #vitals               | 
+| :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
+| #Consumer | #Researcher | #Cardiologist        | #Emergency doctor  | #Endocrinologist | #Lipiodologist| #Nurse                | 
 
+| :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
+| #Features | all         | cp,trestbps,restecg, | trestbps,cp,restecg| fbs              | chol          | Temp,trestbps,restecg |
+|           |             | ca,chol,thalach,slope|                    |                  |               |                       |      
 
 ## Kafka Connect
 
-Apache Kafka is an event streaming and batching solutionand  MongoDB is the world’s most popular modern database built for handling massive volumes of heterogeneous data. Together MongoDB and Kafka make up the heart of many modern data architectures today.
+Apache Kafka is an event streaming and batching solution and  MongoDB is the world’s most popular modern database built for handling massive volumes of heterogeneous data. Together MongoDB and Kafka make up the heart of many modern data architectures today.
 Integrating Kafka with external systems like MongoDB is done through the use of Kafka Connect. This API enables users to leverage ready-to-use components that can stream data from external systems into Kafka topics, and stream data from Kafka topics into external systems. The official MongoDB Connector for Apache Kafka® is developed and supported by MongoDB engineers and verified by Confluent. The connector, now released in Beta, enables MongoDB to be configured as both a sink and a source for Apache Kafka.
 ![](MongoDB_connector.jpg)
 
 In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
-For each topic we verify the [MongoDb Sink Connector](https://github.com/nadinelabidi/Kafka-Mongo/tree/main/Mongodb) is added to Kafka Connect correctly:
+For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Kafka-Mongo/tree/main/Mongodb) is added to Kafka Connect correctly:
 (gif connect)
 ```
 curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
@@ -108,7 +117,10 @@ Verify that data is produced correctly:
 lien localhost topics
 ```
 (gif localhost)
-## Kafka Consumers
+
+
+| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
+| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 
 
 ## MongoDB 
@@ -128,7 +140,7 @@ For our system, we have the following users:
 | User       | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
 | :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
 | Collection | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
-| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
+
 
 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
