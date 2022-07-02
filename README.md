@@ -15,7 +15,7 @@ We will focus on a BigData architecture that respects and deploy a specific solu
 More specifically, we will simulate the gateways with a kafka producer that will create topics where some will be consumed by real-time groups and other will be sent to a mongo Db sink dedicated to "Offline" consumers.
 The architecture we will be applying is the following : 
 
-   ![     ](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG)
+![](kafka_architecture.jpg)
 
 This small tutorial creates a data pipeline from Apache Kafka over MongoDB into Python.
 It focuses on simplicity and can be seen as a baseline for similar projects.
@@ -143,11 +143,12 @@ python3 Gateway.py
 (gif)
 
 Verify that data is produced correctly:
-```
+
 To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
 * Topics
 * Consumers
 * Mongo Sinks
+```
 localhost:9021
 ```
 Here are the verification the the clusters, its containers and the architecture is well existing:
@@ -158,13 +159,30 @@ Here are the verification the the clusters, its containers and the architecture 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
 ```
 docker-compose -it mongo bash
-#mongo -u root -p root
->show dbs
->use <database_name>
->show collections
->db.<collection_name>.find()
 ```
-Connect to MongoDB container as an administrator and attribute the right privileges to each user:
+access mongo as an administrator
+```
+mongo -u root -p root
+```
+To visualize databases and collections
+```
+show dbs
+```
+```
+use <database_name>
+```
+```
+show collections
+```
+To access a specific collection
+```
+db.<collection_name>.find()
+```
+```
+exit
+```
+
+* Connect to MongoDB container as an administrator and attribute the right privileges to each user:
 #### [Create new roles]()
 (gif)
 ####[Create users]()
