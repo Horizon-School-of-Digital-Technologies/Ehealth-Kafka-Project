@@ -6,7 +6,8 @@ The goal is to store data and analyze it in order to automatize decision making 
 These decisions or records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis and reportings.
 Added to this, in "ALERT" cases , specialized emergency teams need to be notified in real-time.
 
-![](![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG))
+![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG)
+
 figure 1 shows an example of an e-health system architecture deployed in a hospital.
 Corporal sensors detect measurments per patient to survey his status (Example : Body temperature, heart beats per sec, blood sugar, etc ..)
 
