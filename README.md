@@ -88,7 +88,7 @@ This group of consumers can read the data from mongodb (Batch/offline):
 * Lipidologist
 * Researcher
 
-### data dictionary**
+### data dictionary
 #### age - age in years
 #### sex - (1 = male; 0 = female)
 #### cp - chest pain type
