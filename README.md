@@ -116,17 +116,11 @@ Administrators have the following responsibilities:
 * View existing user permissions
 * Change user passwords 
 For our system, we have the following users: 
-* Researchers : 
 
-| Attempt | #1  | #2  |
-| :---:   | :-: | :-: |
-| Seconds | 301 | 283 |
+| User       | #Researcher     | #Cardiologist           | #Emergency doctor | #Endocrinologist | #Lipiodologist        | #Nurse                           | 
+| :---:      | :-:             | :-:                     | :-:               |              :-: | :-:                   | :-:                              | 
+| Collection | patients_record | cardio_patients, stroke | stroke            | diabete_patients | dyslipidemia_patients | patients_record, abnormal_vitals |
 
-* Endocrinologists
-* Cardiologists
-* Emergency Doctors
-* Lipiodologists
-* Nurses
 
 
 Connect to MongoDB Container as an administrator and check that the Database Ehealth and the collections were created:
@@ -139,6 +133,10 @@ docker-compose -it mongo bash
 >db.<collection_name>.find()
 ```
 Connect to MongoDB container as an administrator and attribute the right privileges to each user:
+#### [Create new roles]()
+(gif)
+####[Create users]()
+(gif)
 
 
 
