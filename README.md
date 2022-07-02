@@ -15,7 +15,7 @@ We will focus on a BigData architecture that respects and deploy a specific solu
 More specifically, we will simulate the gateways with a kafka producer that will create topics where some will be consumed by real-time groups and other will be sent to a mongo Db sink dedicated to "Offline" consumers.
 The architecture we will be applying is the following : 
 
-![](kafka mongo.PNG)
+![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG)
 
 This small tutorial creates a data pipeline from Apache Kafka over MongoDB into Python.
 It focuses on simplicity and can be seen as a baseline for similar projects.
