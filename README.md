@@ -220,7 +220,8 @@ exit
 * Connect to MongoDB container as an administrator and attribute the right privileges to each [user](https://github.com/nadinelabidi/Ehealth-Kafka-Project/tree/main/Mongodb)
 #### [Create new roles](https://www.mongodb.com/docs/manual/tutorial/manage-users-and-roles/)
 
-####[Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
+#### [Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
+
 (gif)
 
 
