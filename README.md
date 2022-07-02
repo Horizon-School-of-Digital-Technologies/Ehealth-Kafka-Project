@@ -90,10 +90,10 @@ This group of consumers can read the data from mongodb (Batch/offline):
 
 ### Feature list per topic per consumer : (apart from age and sex)
 
-| #Topic    | #research   | #Cardiology          | #Stroke            | #Diabete         | #Dyslipidemia | #vitals               | 
+| Topic     |  research   |  Cardiology          |  Stroke            |  Diabete         |  Dyslipidemia |  vitals               | 
 | :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
-| #Consumer | #Researcher | #Cardiologist        | #Emergency doctor  | #Endocrinologist | #Lipiodologist| #Nurse                | 
-| #Features | all         | cp,trestbps,restecg, | trestbps,cp,restecg| fbs              | chol          | Temp,trestbps,restecg |
+|  Consumer |  Researcher |  Cardiologist        |  Emergency doctor  |  Endocrinologist |  Lipiodologist|  Nurse                | 
+|  Features | all         | cp,trestbps,restecg, | trestbps,cp,restecg| fbs              | chol          | Temp,trestbps,restecg |
 |           |             | ca,chol,thalach,slope|                    |                  |               |                       |      
 
 ## Kafka Connect
