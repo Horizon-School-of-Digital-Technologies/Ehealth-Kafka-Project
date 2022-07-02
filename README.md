@@ -117,9 +117,11 @@ Administrators have the following responsibilities:
 * Change user passwords 
 For our system, we have the following users: 
 * Researchers : 
-Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
-Seconds | 301 | 283 | 290 | 286 | 289 | 285 | 287 | 287 | 272 | 276 | 269
+
+| Attempt | #1  | #2  |
+| :---:   | :-: | :-: |
+| Seconds | 301 | 283 |
+
 * Endocrinologists
 * Cardiologists
 * Emergency Doctors
