@@ -1,10 +1,22 @@
 # Development and Deployment of an E-Health system
+##Mini-project context : 
+In every E-health system, a multitude of sensors or iOT objects are deployed to collect data that surveys activity , status and environment measurments per patients.
+The goal is to store data and analyze it in order to automatize decision making and protect the patients lives. 
+These decisions or records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis and reportings.
+Added to this, in "ALERT" cases , specialized emergency teams need to be notified in real-time.
 
+![](E-health_system.jpg)
+figure 1 shows an example of an e-health system architecture deployed in a hospital.
+Corporal sensors detect measurments per patient to survey his status (Example : Body temperature, heart beats per sec, blood sugar, etc ..)
 
+In our mini project, we will go a little further in details in terms of system specifications and components necessary to deploy. 
+We will focus on a BigData architecture that respects and deploy a specific solution based on "Batch" treatment.
+More specifically, we will simulate the gateways with a kafka producer that will create topics where some will be consumed by real-time groups and other will be sent to a mongo Db sink dedicated to "Offline" consumers.
+The architecture we will be applying is the following : 
 
 ![](kafka_architecture.jpg)
 
-This small tutorial creates a data pipeline from Apache Kafka over MongoDB into R or Python.
+This small tutorial creates a data pipeline from Apache Kafka over MongoDB into Python.
 It focuses on simplicity and can be seen as a baseline for similar projects.
 
 ## Prerequisites
@@ -18,7 +30,7 @@ It focuses on simplicity and can be seen as a baseline for similar projects.
 docker-compose up --build -d
 ```
 
-It starts:
+The build will create the following containers : 
 * Zookeeper
 * Kafka Broker 
 * Kafka 
@@ -28,7 +40,7 @@ It starts:
 * control-center
 
 
-iuglkg
+
 ## Kafka Producer
 
 [The Kafka Producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
