@@ -1,6 +1,6 @@
 from kafka import KafkaConsumer
-topic_name = 'cardiologist'
-consumer = KafkaConsumer('cardiology', group_id='cardio', auto_offset_reset=
+topic_name = 'cardiology'
+consumer = KafkaConsumer(topic_name, group_id='cardio', auto_offset_reset=
 "earliest",bootstrap_servers= 'localhost:9092')
 for msg in consumer:
     print(msg)
