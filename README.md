@@ -188,21 +188,16 @@ For our system, we have the following users:
 
 In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
 For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Mongodb/sink.sh) is added to Kafka Connect correctly:
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink.gif)
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink2.gif)
-```
-curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
-```
-
-
 Start the connector:
 ```
-curl -X POST -H "Content-Type: application/json" --data @MongoDBConnector.json http://localhost:8083/connectors | jq
+sh sink.sh
 ```
-Verify that the connector is up and running:
-```
-curl localhost:8083/connectors/TestData/status | jq
-```
+
+
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink.gif)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink2.gif)
+
+
 
 
 
@@ -268,15 +263,8 @@ db.createRole(
    }
 )
 ```
-```
-use Ehealth 
-```
-db.createUser({user: 'Cardiologist',
-  pwd: 'cardiologist',
-  roles: [
-    { role: 'CardiologistReadWrite', db: 'Ehealth'},
-    { role: 'CardiologistRead', db: 'Ehealth'}
-  ]})
+
+
 ![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/usercardio.gif)
 
 #### [Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
