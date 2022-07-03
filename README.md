@@ -30,6 +30,7 @@ It focuses on simplicity and can be seen as a baseline for similar projects.
 
 * [docker](https://docs.docker.com/get-docker/)
 * [docker-compose](https://docs.docker.com/compose/install/)
+* Import necessary  [modules](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Docker/modules.sh)
 
 
 ## Set up
