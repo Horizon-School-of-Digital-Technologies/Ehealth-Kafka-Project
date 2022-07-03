@@ -53,7 +53,7 @@ The build will create the following containers :
 [The Kafka Producer](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/gateway.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
 The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will reade the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
 The subset is obtained from the original [dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) which we used to develop our machine learning model to classify the patients.
-
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/gateway.gif)
 We managed to select 6 Topics in total.
 * Topic research:  
 Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
@@ -161,11 +161,12 @@ For our system, we have the following users:
 
 In our case, we used Kafka Connect to transfer the Data from Kafka topics to MongoDB.
 For each topic we verify that the [MongoDb Sink Connector](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Mongodb/sink.sh) is added to Kafka Connect correctly:
-(gif connect)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink.gif)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/mongosink2.gif)
 ```
 curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
 ```
-(gif localhost connect)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/topics.gif)
 
 Start the connector:
 ```
@@ -227,7 +228,7 @@ exit
 
 #### [Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
 
-(gif)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/cardiologistasauser.gif)
 
 
 
