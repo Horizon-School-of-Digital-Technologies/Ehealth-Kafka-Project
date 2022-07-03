@@ -1,0 +1,4 @@
+ConsumerRecord(topic='diabete', partition=0, offset=0, timestamp=1656842957495, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:17.227774", "measures": {"age": 53, "sex": 1, "fbs": 1}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=83, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='diabete', partition=0, offset=1, timestamp=1656842957497, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:17.497695", "measures": {"age": 62, "sex": 0, "fbs": 1}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=83, serialized_header_size=-1)
+ 

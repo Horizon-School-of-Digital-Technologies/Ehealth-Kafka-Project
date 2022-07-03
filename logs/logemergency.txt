@@ -1,0 +1,20 @@
+ConsumerRecord(topic='stroke', partition=0, offset=0, timestamp=1656842956706, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.469878", "Alert stroke/restecg abnormal": {"age": 52, "sex": 1, "cp": 0, "restecg": 1, "trestbps": 125, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=146, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=1, timestamp=1656842956707, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.707309", "Alert stroke !!! decrease blood supply": {"age": 53, "sex": 1, "cp": 0, "restecg": 0, "trestbps": 140, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=155, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=2, timestamp=1656842956707, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.707611", "Alert stroke/restecg abnormal": {"age": 70, "sex": 1, "cp": 0, "restecg": 1, "trestbps": 145, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=146, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=3, timestamp=1656842956707, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.707823", "Alert stroke/restecg abnormal": {"age": 61, "sex": 1, "cp": 0, "restecg": 1, "trestbps": 148, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=146, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=4, timestamp=1656842956708, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.708010", "Alert stroke/restecg abnormal": {"age": 62, "sex": 0, "cp": 0, "restecg": 1, "trestbps": 138, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=146, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=5, timestamp=1656842956708, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.708248", "Alert !!! Cardio patient to survey": {"age": 58, "sex": 0, "cp": 0, "restecg": 0, "trestbps": 100, "label": 1}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=151, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=6, timestamp=1656842956708, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.708483", "Alert stroke/restecg abnormal": {"age": 58, "sex": 1, "cp": 0, "restecg": 2, "trestbps": 114, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=146, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=7, timestamp=1656842956708, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.708687", "Alert !!! trestbps> 140": {"age": 55, "sex": 1, "cp": 0, "restecg": 0, "trestbps": 160, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=140, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=8, timestamp=1656842956708, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.708884", "Alert stroke !!! decrease blood supply": {"age": 46, "sex": 1, "cp": 0, "restecg": 0, "trestbps": 120, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=155, serialized_header_size=-1)
+ 
+ConsumerRecord(topic='stroke', partition=0, offset=9, timestamp=1656842956709, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.709089", "Alert stroke !!! decrease blood supply": {"age": 54, "sex": 1, "cp": 0, "restecg": 0, "trestbps": 122, "label": 0}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=155, serialized_header_size=-1)
+ 

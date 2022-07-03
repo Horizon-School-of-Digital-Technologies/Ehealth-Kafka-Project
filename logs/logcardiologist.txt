@@ -1,0 +1,2 @@
+ConsumerRecord(topic='cardiology', partition=0, offset=0, timestamp=1656842957227, timestamp_type=0, key=None, value=b'{"date": "2022-07-03 11:09:16.966616", "measures": {"age": 58, "sex": 0, "cp": 0, "restecg": 0, "trestbps": 100, "thalach": 122, "ca": 0, "slope": 1, "chol": 248, "label": 1}}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=175, serialized_header_size=-1)
+ 
