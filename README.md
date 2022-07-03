@@ -78,6 +78,27 @@ Vital signs are measurements of the body's most basic functions and are routinel
 Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
 Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
 
+Run the produce:
+```
+python3 Gateway.py
+```
+### Running the Kafka producer
+![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
+
+
+Verify that data is produced correctly:
+
+To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
+* Topics
+* Consumers
+* Mongo Sinks
+```
+localhost:9021
+```
+Here are the verification its the clusters, its containers and the architecture is well existing:
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/topics.gif)
+
+
 ## Kafka Consumers
 ### Consumer Group A 
 * [Nurses](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/nurse.py)
@@ -85,6 +106,12 @@ Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Car
  These consumers are Stream Consumers + get alerted when needed 
  Emergency doctors get an alert if a stroke is predicted
  The Nurses get an alert if vital signs exceed normal values
+ Run a consumer:
+```
+python3 emergency_doctors.py
+```
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/emergency_doctor.gif)
+
 ### Consumer Group B  
 This group of consumers can read the data from mongodb (Batch/offline):
 * Group A
@@ -176,24 +203,6 @@ Verify that the connector is up and running:
 ```
 curl localhost:8083/connectors/TestData/status | jq
 ```
-### [Running the Kafka producer](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
-Run the produce:
-```
-python3 Gateway.py
-```
-(gif)
-
-Verify that data is produced correctly:
-
-To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
-* Topics
-* Consumers
-* Mongo Sinks
-```
-localhost:9021
-```
-Here are the verification the the clusters, its containers and the architecture is well existing:
-(gif localhost)
 
 
 
