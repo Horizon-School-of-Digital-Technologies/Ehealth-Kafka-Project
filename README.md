@@ -234,11 +234,63 @@ exit
 
 * Connect to MongoDB container as an administrator and attribute the right privileges to each [user](https://github.com/nadinelabidi/Ehealth-Kafka-Project/tree/main/Mongodb)
 #### [Create new roles](https://www.mongodb.com/docs/manual/tutorial/manage-users-and-roles/)
-
+```
+db.createRole(
+   {
+     role: "CardiologistReadWrite",
+     privileges: [
+        {
+          resource: {
+            role: 'readWrite',
+            db: 'Ehealth',
+            collection: 'cardio_patients'
+          }, actions: ["find","update","insert"]
+        }
+     ],
+     roles: []
+   }
+)
+```
+```
+db.createRole(
+   {
+     role: "CardiologistRead",
+     privileges: [
+        {
+          resource: {
+            role: 'read',
+            db: 'Ehealth',
+            collection: 'stroke'
+          }, actions: ["find"]
+        }
+     ],
+     roles: []
+   }
+)
+```
+```
+use Ehealth 
+```
+db.createUser({user: 'Cardiologist',
+  pwd: 'cardiologist',
+  roles: [
+    { role: 'CardiologistReadWrite', db: 'Ehealth'},
+    { role: 'CardiologistRead', db: 'Ehealth'}
+  ]})
 ![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/usercardio.gif)
 
 #### [Create users](https://www.mongodb.com/docs/manual/reference/method/db.createUser/)
-
+```
+use Ehealth 
+```
+```
+db.createUser({user: 'Cardiologist',
+  pwd: 'cardiologist',
+  roles: [
+    { role: 'CardiologistReadWrite', db: 'Ehealth'},
+    { role: 'CardiologistRead', db: 'Ehealth'}
+  ]})
+```
 ![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/cardiologistasauser.gif)
 
 
