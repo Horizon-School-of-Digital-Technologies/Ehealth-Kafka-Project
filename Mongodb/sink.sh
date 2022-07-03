@@ -1,5 +1,5 @@
 curl -X POST -H "Content-Type: application/json" --data '
-  {"name": "mongosinkdiabetes",
+  {"name": "mongosinkcardio",
    "config": {
      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
      "tasks.max":"1",
@@ -45,14 +45,14 @@ curl -X POST -H "Content-Type: application/json" --data '
  
  
  curl -X POST -H "Content-Type: application/json" --data '
-  {"name": "mongosinkdyslipidemia",
+  {"name": "mongosinkresearch",
    "config": {
      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
      "tasks.max":"1",
-     "topics":"dyslipidemia",
+     "topics":"research",
      "connection.uri":"mongodb://root:root@mongo:27017",
      "database":"Ehealth",
-     "collection":"dyslipidemia_patients",
+     "collection":"patients_record",
      "key.converter":"org.apache.kafka.connect.storage.StringConverter",
      "key.converter.schemas.enable":false,
      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
@@ -79,7 +79,7 @@ curl -X POST -H "Content-Type: application/json" --data '
    "config": {
      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
      "tasks.max":"1",
-     "topics":"Vitals",
+     "topics":"vitals",
      "connection.uri":"mongodb://root:root@mongo:27017",
      "database":"Ehealth",
      "collection":"abnormal_vitals",
