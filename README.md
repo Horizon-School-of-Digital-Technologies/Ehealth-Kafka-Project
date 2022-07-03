@@ -82,7 +82,7 @@ Run the produce:
 ```
 python3 Gateway.py
 ```
-### Running the Kafka producer
+#### Running the Kafka producer
 ![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
 
 
@@ -193,7 +193,7 @@ For each topic we verify that the [MongoDb Sink Connector](https://github.com/na
 ```
 curl -s -XGET http://localhost:8083/connector-plugins | jq '.[].class'
 ```
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/topics.gif)
+
 
 Start the connector:
 ```
