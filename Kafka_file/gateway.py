@@ -8,16 +8,17 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import pandas as pd
 import pickle
+import time
                #------------------------------------------------#
 ##import necessary modules for kafka producer
 import json
 from kafka import KafkaProducer
-from datetime import datetime
-from time import *
+
+
                #------------------------------------------------#
 producer = KafkaProducer(bootstrap_servers='localhost:9092',value_serializer=lambda v:
 json.dumps(v).encode('utf-8'))
-now = datetime.now()
+
 ## Classification output : Labellize patients 
 def classification_function(X,model):
     y_pred = model.predict(X)
@@ -26,9 +27,50 @@ def classification_function(X,model):
     
 ## load model from file
 loaded_model = pickle.load(open("pipefull.pickle.dat", "rb"))
-##upload test dataset (10 lines of patient measurements
-patients_record = pd.read_csv('test.csv')
 
+##upload test dataset (10 lines of patient measurements
+DF = pd.read_csv('test.csv')
+                #------------------------------------------------#
+                
+
+features=['age','sex','cp','trestbps','Temp','chol','fbs','restecge','thalach','exang','oldpeak', 'slope','ca','thal']
+conditions=[[list(range(0,100))],[1,0],[0,1,2,3],[list(range(0,200))],[list(range(0,50))],[list(range(0,350))],[0,1],[0,1,2],[list(range(0,350))],[0,1,2],[list(range(0,20))],[0,1,2,3],[0,1,2,3],[0,1,2,3]]
+L=[]
+
+##input new data 
+
+def function_input(condition,feature,L):
+    
+    value=(input(f"enter {feature}: "))
+    if  (value in enumerate(condition)) :
+        x = value
+        L.append(x)
+    else:
+        L=[] 
+    
+    return L
+     
+ch2=input("would you like to input? (y/n) " )  
+if ch2 == "y" :
+   for i in range(len(features)):
+       function_input(conditions[i],features[i],L)
+       
+else:
+     print("ok")
+
+if L==[] : 
+   DF = DF
+else:   
+   DF.loc[len(DF)] = L
+
+
+
+patients_record = DF       
+                
+                
+                #------------------------------------------------#
+##predict label
+                
 classification_function(patients_record,loaded_model)
 
 ## create sub-datasets with specific features per topic
@@ -42,21 +84,24 @@ cholesterol = patients_record[['age','sex','chol']]
 def function_alert_vitals(topic,df):
     for j,row in df.iterrows():
         if (row['restecg'] ==0) :
-            message={'date':str(datetime.now()), 'Alert !!! restecg=0' : row.to_dict()}
+            message={ 'date': time.ctime(), 'Alert !!! restecg=0' : row.to_dict()}
             producer.send(topic ,message)
+            time.sleep(2)
+            
             
         else:
             if (row['trestbps'] >140):
-                message={'date':str(datetime.now()), 'Alert !!! trestbps> 140' : row.to_dict()}
+                message={ 'date': time.ctime(),'Alert !!! trestbps> 140' : row.to_dict()}
                 producer.send(topic, message)
+                time.sleep(2)
                 
                 
 
             else:
                 if (row['Temp'] > 38 ):
-                    message={'date':str(datetime.now()), 'Alert !!! Temperature> 38' : row.to_dict()}
+                    message={'date': time.ctime(),'Alert !!! Temperature> 38' : row.to_dict()}
                     producer.send(topic, message)
-  
+                    time.sleep(2)
                     
 
               #------------------------------------------------# 
@@ -65,26 +110,28 @@ def function_alert_vitals(topic,df):
 def function_alert_stroke(topic,df):
     for j,row in df.iterrows():
         if (row['label'] ==1) :
-            message={'date':str(datetime.now()), 'Alert !!! Cardio patient to survey' : row.to_dict()}
+            message={ 'date': time.ctime(),'Alert !!! Cardio patient to survey' : row.to_dict()}
             producer.send(topic ,message)
+            time.sleep(2)
             
 
         else: 
             if (row['restecg'] ==1) or (row['restecg'] ==2):
-                message={'date':str(datetime.now()), 'Alert stroke/restecg abnormal' : row.to_dict()}
+                message={ 'date': time.ctime(),'Alert stroke/restecg abnormal' : row.to_dict()}
                 producer.send(topic ,message)
-              
+                time.sleep(2)
 
             else:
                 if (row['trestbps'] >140):
-                    message={'date':str(datetime.now()), 'Alert !!! trestbps> 140' : row.to_dict()}
+                    message={ 'date': time.ctime(),'Alert !!! trestbps> 140' : row.to_dict()}
                     producer.send(topic, message)
-                    
+                    time.sleep(1)
 
                 else:
                     if (row['cp'] == 0 ):
-                        message={'date':str(datetime.now()), 'Alert stroke !!! decrease blood supply' : row.to_dict()}
+                        message={'date': time.ctime(),'Alert stroke !!! decrease blood supply' : row.to_dict()}
                         producer.send(topic, message)
+                        time.sleep(2)
                
 
               #------------------------------------------------#   
@@ -93,8 +140,9 @@ def function_alert_stroke(topic,df):
 def function_cardiology_patients(topic,df):
     for j,row in df.iterrows():
         if (row['label'] == 1):
-            message={'date':str(datetime.now()), 'measures' : row.to_dict()}
+            message={ 'date': time.ctime(),'measures' : row.to_dict()}
             producer.send(topic, message)
+            time.sleep(2)
  
 
              #------------------------------------------------#
@@ -103,8 +151,9 @@ def function_cardiology_patients(topic,df):
 def function_diabetes_patients(topic,df):
     for j,row in df.iterrows():
         if (row['fbs'] == 1):
-            message={'date':str(datetime.now()), 'measures' : row.to_dict()}
+            message={ 'date': time.ctime(),'measures' : row.to_dict()}
             producer.send(topic, message)
+            time.sleep(2)
    
 
              #------------------------------------------------#  
@@ -112,17 +161,18 @@ def function_diabetes_patients(topic,df):
 def function_cholesterol_patients(topic,df):
     for j,row in df.iterrows():
         if (row['chol'] > 200 ):
-            message={'date':str(datetime.now()), 'measures' : row.to_dict()}
+            message={ 'date': time.ctime(),'measures' : row.to_dict()}
             producer.send(topic, message)
-    
+            time.sleep(2)
        
              #------------------------------------------------#  
                 
 ##Creating message content for research purposes
 def function_Research_stats(topic,df):
     for j,row in df.iterrows():
-        message={'date':str(datetime.now()), 'measures' : row.to_dict()}
+        message={ 'date': time.ctime(),'measures' : row.to_dict()}
         producer.send(topic, message)
+        time.sleep(1)
 
 
              #------------------------------------------------# 
