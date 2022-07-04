@@ -1,9 +1,9 @@
 # Development and Deployment of an E-Health system
 ## Mini-project context: 
 
-In every E-health system, a multitude of sensors or iOT objects are deployed to collect data that surveys activity , status and environment measurments per patients.
+In every E-health system, a multitude of sensors or iOT devices are deployed to collect data that surveys activity , status and environment measurments for patients.
 The goal is to store data and analyze it in order to automatize decision making and protect the patients lives. 
-These decisions or records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis and reportings.
+These records may be taken on the spot, real-time, or sent to a BigData system for storage and futur diagnosis or reportings.
 Added to this, in "ALERT" cases , specialized emergency teams need to be notified in real-time.
 
 ![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/kafka%20mongo.PNG)
@@ -12,17 +12,17 @@ This figure  shows an example of an e-health system architecture deployed in a h
 Corporal sensors detect measurments per patient to survey his status (Example : Body temperature, heart beats per sec, blood sugar, etc ..)
 
 In our mini project, we will go a little further in details in terms of system specifications and components necessary to deploy. 
-We will focus on a BigData architecture that respects and deploy a specific solution based on "Batch" treatment.
+We will focus on a BigData architecture that respects and deploys a specific solution based on "Batch" treatment.
 More specifically, we will simulate the gateways with a kafka producer that will create topics where some will be consumed by real-time groups and other will be sent to a mongo Db sink dedicated to "Offline" consumers.
 The architecture we will be applying is the following : 
 
 ![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/kafka_architecture.png)
 
 To keep it simple, we have
-*Kafka cluster (with a Broker and a zookeeper)
-*Producer API: Publish messages to the topics in the Kafka cluster.
-*Consumer API: Consume messages from the topics in the Kafka cluster.
-*Connect API: Directly connect the Kafka cluster the sink system without coding. The system here is our mongoDB NoSQL database.
+* Kafka cluster (with a Broker and a zookeeper)
+* Producer API: Publishes messages to the topics in the Kafka cluster.
+* Consumer API: Consumes messages from the topics in the Kafka cluster.
+* Connect API: Directly connects the Kafka cluster the sink system without coding. The system here is our mongoDB NoSQL database.
 This small tutorial creates a data pipeline from Apache Kafka over MongoDB into Python.
 It focuses on simplicity and can be seen as a baseline for similar projects.
 
@@ -44,7 +44,6 @@ docker-compose up --build -d
 The build will create the following containers : 
 * Zookeeper
 * Kafka Broker 
-* Kafka 
 * Kafka Connect
     * with [MongoDB Connector](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
 * MongoDB 
@@ -54,75 +53,10 @@ The build will create the following containers :
 
 ## Kafka Producer
 
-[The Kafka Producer](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/gateway.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
-The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will reade the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
+![The Kafka Producer](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/gateway.py) fakes a Gateway simulator to push data into the topics ` in `JSON` format every five seconds.
+The producer script in Kafka will do the job of data collector / Gateways  and will read / collect data from the sub-dataset [test.csv] that contains 10 lines of different patient measurements without the label (0/1). Kafka producer will read the file line by line to simulate the gateway and send to the consumer with a sleep of 5 seconds.
 The subset is obtained from the original [dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) which we used to develop our machine learning model to classify the patients.
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/gateway.gif)
-We managed to select 6 Topics in total.
-* Topic research:  
-Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
-
-* Topic dyslipidimeia: 
-It is the imbalance of lipids such as cholesterol, low-density lipoprotein cholesterol, (LDL-C), triglycerides, and high-density lipoprotein (HDL).
-
-
-* Topic diabete:
-Diabetes is a chronic (long-lasting) health condition that affects how your body turns food into energy and it is detected by a Fasting blood sugar test.
-
-
-* Topic stroke:
-A stroke is a serious life-threatening medical condition that happens when the blood supply to part of the brain is cut off. Strokes are a medical emergency and urgent treatment is essential.
-Stroke will be defined based on specific features values 
-
-* Topic vitals: 
-Vital signs are measurements of the body's most basic functions and are routinely checked by healthcare providers include:
-     
-
-* Topic cardiology: 
-Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
-Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
-
-Run the produce:
-```
-python3 Gateway.py
-```
-#### Running the Kafka producer
-![](https://github.com/nadinelabidi/Kafka-Mongo/blob/main/Kafka_file/producer2.py)
-
-
-Verify that data is produced correctly:
-
-To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
-* Topics
-* Consumers
-* Mongo Sinks
-```
-localhost:9021
-```
-Here are the verification its the clusters, its containers and the architecture is well existing:
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/topics.gif)
-
-
-## Kafka Consumers
-### Consumer Group A 
-* [Nurses](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/nurse.py)
-* [Emergency doctors](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/emergency_doctor.py) 
- These consumers are Stream Consumers + get alerted when needed 
- Emergency doctors get an alert if a stroke is predicted
- The Nurses get an alert if vital signs exceed normal values
- Run a consumer:
-```
-python3 emergency_doctors.py
-```
-![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/emergency_doctor.gif)
-
-### Consumer Group B  
-This group of consumers can read the data from mongodb (Batch/offline):
-* Group A
-* [Cardiologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/cardiologist.py)
-* [Endocrinologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/endocrinologist.py)
-* [Lipidologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/lipidologist.py)
-* [Researcher](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/researcher.py)
+Here we have a view of our data:
 
 ### data dictionary
 #### age - age in years
@@ -158,13 +92,81 @@ can range from mild symptoms to severe problems/ signals non-normal heart beat
 * 6: fixed defect: used to be defect but ok now
 * 7: reversable defect: no proper blood movement when excercising
 
-## Feature list per topic per consumer : (apart from age and sex)
+
+
+We managed to select 6 Topics in total.
+* Topic research:  
+Healthcare Data is one of the most important data and organizations working with health data are developing many needed healthcare improvements for that the department research needs to have access to the full Database collected.
+
+* Topic dyslipidimeia: 
+It is the imbalance of lipids such as cholesterol, low-density lipoprotein cholesterol, (LDL-C), triglycerides, and high-density lipoprotein (HDL).
+
+
+* Topic diabete:
+Diabetes is a chronic (long-lasting) health condition that affects how your body turns food into energy and it is detected by a Fasting blood sugar test.
+
+
+* Topic stroke:
+A stroke is a serious life-threatening medical condition that happens when the blood supply to part of the brain is cut off. Strokes are a medical emergency and urgent treatment is essential.
+Stroke will be defined based on specific features values 
+
+* Topic vitals: 
+Vital signs are measurements of the body's most basic functions and are routinely checked by healthcare providers include:
+     
+
+* Topic cardiology: 
+Angina is chest pain caused by reduced blood flow to the heart muscles. It's not usually life threatening, but it's a warning sign that you could be at risk of a heart attack or stroke. 
+Classification based on XGBoost ML classifier model: 0 :normal patient / 1 : Cardio patient
+
+#### Running the Kafka producer
+```
+python3 Gateway.py
+```
+
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/gateway.py)
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/demoproducer.gif)
+
+## Kafka Consumers
+### Consumer Group A 
+* [Nurses](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/nurse.py)
+* [Emergency doctors](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/emergency_doctor.py) 
+ These consumers are Stream Consumers + get alerted when needed 
+ Emergency doctors get an alert if a stroke is predicted
+ The Nurses get an alert if vital signs exceed normal values
+ #### Run a consumer:
+```
+python3 emergency_doctors.py
+```
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/emergency.gif)
+
+### Consumer Group B  
+This group of consumers can read the data from mongodb (Batch/offline):
+* Group A
+* [Cardiologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/cardiologist.py)
+* [Endocrinologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/endocrinologist.py)
+* [Lipidologist](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/lipidologist.py)
+* [Researcher](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Kafka_file/researcher.py)
+
+### Feature list per topic per consumer : (apart from age and sex)
 
 | Topic     |  research   |  Cardiology          |  Stroke            |  Diabete         |  Dyslipidemia |  vitals               | 
 | :---:     | :-:         | :-:                  | :-:                |       :-:        | :-:           | :-:                   | 
 |  Consumer |  Researcher |  Cardiologist        |  Emergency doctor  |  Endocrinologist |  Lipiodologist|  Nurse                | 
 |  Features | all         | cp,trestbps,restecg, | trestbps,cp,restecg| fbs              | chol          | Temp,trestbps,restecg |
 |           |             | ca,chol,thalach,slope|                    |                  |               |                       |      
+
+#### Verify that data is produced correctly:
+
+To access Confuent Control Center and Visualize the Cluster as well as the architecture created :
+* Topics
+* Consumers
+* Mongo Sinks
+```
+localhost:9021
+```
+Here are the verification its the clusters, its containers and the architecture is well existing:
+![](https://github.com/nadinelabidi/Ehealth-Kafka-Project/blob/main/Demo/topics.gif)
+
 
 ## Kafka Connect
 
